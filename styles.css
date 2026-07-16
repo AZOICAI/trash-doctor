@@ -465,6 +465,20 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
 
 .price-card h3 { font-size: 1.08rem; }
 
+.price-tagline {
+  font-size: .85rem;
+  color: var(--ink-soft);
+  margin-top: .25rem;
+}
+
+.price-includes {
+  font-family: var(--font-head);
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--green-500);
+  margin-bottom: .9rem;
+}
+
 .price {
   font-family: var(--font-head);
   font-size: 3rem;
@@ -473,7 +487,12 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
   margin-block: .8rem 1rem;
 }
 .price sup { font-size: 1.4rem; top: -1.1em; }
-.price span {
+.price .cents {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--green-800);
+}
+.price .per {
   font-size: .95rem;
   font-weight: 600;
   color: var(--ink-soft);
@@ -504,46 +523,41 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
   margin-top: 1.6rem;
 }
 
-/* ============ Reviews ============ */
-.stars { color: #f5a623; letter-spacing: .12em; }
-
-.review-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.6rem;
+/* ============ Guarantee / Grand Opening ============ */
+.guarantee {
+  background: linear-gradient(180deg, #f6faf6 0%, var(--white) 100%);
 }
 
-.review {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 1.8rem;
-  box-shadow: 0 4px 14px rgba(18, 52, 32, .05);
-}
-.review p {
-  margin-block: .8rem 1.2rem;
-  font-size: .95rem;
-  color: var(--ink);
-}
-.review footer {
-  display: flex;
-  align-items: center;
-  gap: .7rem;
-}
-.avatar {
-  display: grid;
-  place-items: center;
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  background: var(--green-800);
+.guarantee-banner {
+  text-align: center;
+  background: var(--green-900);
   color: var(--white);
-  font-family: var(--font-head);
-  font-weight: 700;
+  border-radius: var(--radius);
+  padding: 3.2rem 2rem;
 }
-.review cite {
-  font-style: normal;
-  font-weight: 600;
-  font-size: .9rem;
+
+.guarantee-eyebrow {
+  font-family: var(--font-head);
+  font-size: .8rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--green-accent);
+  margin-bottom: .8rem;
+}
+
+.guarantee-banner h2 {
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-weight: 800;
+  max-width: 18ch;
+  margin-inline: auto;
+}
+
+.guarantee-lead {
+  margin: 1rem auto 1.8rem;
+  max-width: 48ch;
+  opacity: .9;
+  font-size: 1.02rem;
 }
 
 /* ============ FAQ ============ */
@@ -634,6 +648,14 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
 .form-success {
   font-weight: 600;
   color: var(--green-accent);
+}
+
+.service-area-line {
+  margin-top: 1.6rem;
+  font-size: .9rem;
+  opacity: .85;
+  max-width: 42ch;
+  margin-inline: auto;
 }
 
 /* ============ Footer ============ */
@@ -727,7 +749,6 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
   .reasons { grid-template-columns: repeat(2, 1fr); }
   .price-grid { grid-template-columns: 1fr; max-width: 440px; margin-inline: auto; }
   .price-card.featured { transform: none; }
-  .review-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 
   .main-nav {
