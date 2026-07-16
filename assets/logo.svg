@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 112" role="img" aria-label="Trash Doctor logo">
+  <!-- lid handle -->
+  <path d="M38 12 v-2 a6 6 0 0 1 6 -6 h12 a6 6 0 0 1 6 6 v2" fill="none" stroke="#1D4B2C" stroke-width="7"/>
+  <!-- lid -->
+  <rect x="16" y="12" width="68" height="10" rx="3" fill="#1D4B2C"/>
+  <!-- shield body -->
+  <path d="M26 30 h48 v28 c0 21 -13.5 33 -24 39.5 C39.5 91 26 79 26 58 z" fill="#ffffff" stroke="#1D4B2C" stroke-width="8" stroke-linejoin="round"/>
+  <!-- medical cross -->
+  <path d="M44 44 h12 v12 h12 v12 h-12 v12 h-12 v-12 h-12 v-12 h12 z" fill="#6CB33F"/>
+</svg>
