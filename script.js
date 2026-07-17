@@ -100,6 +100,7 @@ bookForm.addEventListener("submit", async (e) => {
         address: formData.address,
         plan: formData.plan,
         bins: formData.bins,
+        consent: formData.consent ? "Agreed to Terms, Privacy Policy, and call/text contact" : "",
       }),
     });
     const result = await res.json().catch(() => ({}));

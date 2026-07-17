@@ -562,11 +562,69 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
   margin-inline: auto;
 }
 
-.guarantee-lead {
-  margin: 1rem auto 1.8rem;
-  max-width: 48ch;
-  opacity: .9;
-  font-size: 1.02rem;
+.guarantee-legal {
+  margin-top: 1.2rem;
+  font-size: .85rem;
+}
+.guarantee-legal a {
+  color: rgba(255,255,255,.85);
+  text-decoration: underline;
+}
+.guarantee-legal a:hover { color: var(--green-accent); }
+
+.form-consent {
+  display: flex;
+  gap: .7rem;
+  align-items: flex-start;
+  text-align: left;
+  font-size: .82rem;
+  line-height: 1.45;
+  opacity: .92;
+  max-width: 640px;
+}
+.form-consent input {
+  margin-top: .25rem;
+  width: auto;
+  accent-color: var(--green-accent);
+}
+.form-consent a {
+  color: var(--green-accent);
+}
+
+/* ============ Legal pages ============ */
+.legal-page {
+  padding-block: 3.5rem 4.5rem;
+  background: linear-gradient(180deg, #f6faf6 0%, var(--white) 120px);
+}
+.legal-page h1 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  color: var(--green-800);
+}
+.legal-meta {
+  color: var(--ink-soft);
+  font-size: .9rem;
+  margin: .6rem 0 1.6rem;
+}
+.legal-page h2 {
+  font-size: 1.15rem;
+  margin-top: 2rem;
+  margin-bottom: .6rem;
+  color: var(--green-800);
+}
+.legal-page p,
+.legal-page li {
+  color: var(--ink);
+  font-size: .98rem;
+}
+.legal-page ul {
+  margin: .5rem 0 1rem 1.2rem;
+}
+.legal-page li { margin-bottom: .35rem; }
+.legal-page a { color: var(--green-500); }
+.legal-back {
+  margin-top: 2.5rem;
+  font-weight: 600;
 }
 
 /* ============ FAQ ============ */
