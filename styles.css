@@ -641,6 +641,16 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
   gap: 1rem;
   width: 100%;
 }
+
+.form-row-single {
+  grid-template-columns: 1fr;
+}
+
+.form-hint {
+  margin: 0;
+  font-size: .85rem;
+  opacity: .8;
+}
 .book-form input,
 .book-form select {
   width: 100%;

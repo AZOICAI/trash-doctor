@@ -93,12 +93,13 @@ bookForm.addEventListener("submit", async (e) => {
       },
       body: JSON.stringify({
         access_key: WEB3FORMS_ACCESS_KEY,
-        subject: `New Trash Doctor booking — ${formData.plan}`,
+        subject: `New Trash Doctor booking — ${formData.plan} (${formData.bins} bins)`,
         from_name: "Trash Doctor Website",
         name: formData.name,
         phone: formData.phone,
         address: formData.address,
         plan: formData.plan,
+        bins: formData.bins,
       }),
     });
     const result = await res.json().catch(() => ({}));

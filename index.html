@@ -306,11 +306,24 @@
             <input type="text" name="address" placeholder="Street address" required />
             <select name="plan" required>
               <option value="" disabled selected>Choose a plan</option>
-              <option>Monthly Checkup — $29.99/mo (2 bins)</option>
-              <option>Quarterly Booster — $39.99/clean (2 bins)</option>
-              <option>First Aid (One-Time Deep Clean) — $89.95 (2 bins)</option>
+              <option>Monthly Checkup — $29.99/mo (includes 2 bins)</option>
+              <option>Quarterly Booster — $39.99/clean (includes 2 bins)</option>
+              <option>First Aid (One-Time Deep Clean) — $89.95 (includes 2 bins)</option>
             </select>
           </div>
+          <div class="form-row form-row-single">
+            <select name="bins" required>
+              <option value="" disabled selected>How many bins?</option>
+              <option value="1">1 bin</option>
+              <option value="2">2 bins (included in plan)</option>
+              <option value="3">3 bins (+$5)</option>
+              <option value="4">4 bins (+$10)</option>
+              <option value="5">5 bins (+$15)</option>
+              <option value="6">6 bins (+$20)</option>
+              <option value="7+">7+ bins (we'll confirm price)</option>
+            </select>
+          </div>
+          <p class="form-hint">Plans include 2 bins. Extra bins are only $5 each.</p>
           <button type="submit" class="btn btn-primary btn-lg">Book Now <span aria-hidden="true">→</span></button>
           <p class="form-success" id="formSuccess" hidden>Thanks! We got your request and will call or text you shortly to confirm.</p>
         </form>
