@@ -53,12 +53,45 @@ const observer = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-// Booking form (client-side only — wire up to a form service or backend later)
+// Booking form → texts your phone via /api/book (Twilio on Vercel)
 const bookForm = document.getElementById("bookForm");
 const formSuccess = document.getElementById("formSuccess");
+const submitBtn = bookForm.querySelector('button[type="submit"]');
 
-bookForm.addEventListener("submit", (e) => {
+bookForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  formSuccess.hidden = false;
-  bookForm.reset();
+
+  formSuccess.hidden = true;
+  formSuccess.classList.remove("form-error");
+  submitBtn.disabled = true;
+  const originalLabel = submitBtn.innerHTML;
+  submitBtn.textContent = "Sending…";
+
+  const data = Object.fromEntries(new FormData(bookForm).entries());
+
+  try {
+    const res = await fetch("/api/book", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    const result = await res.json().catch(() => ({}));
+
+    if (!res.ok) {
+      throw new Error(result.error || "Could not send booking.");
+    }
+
+    formSuccess.textContent =
+      "Thanks! We got your request and will text you shortly to confirm.";
+    formSuccess.hidden = false;
+    bookForm.reset();
+  } catch (err) {
+    formSuccess.textContent =
+      err.message || "Something went wrong. Please call (469) 742-1073.";
+    formSuccess.classList.add("form-error");
+    formSuccess.hidden = false;
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalLabel;
+  }
 });
