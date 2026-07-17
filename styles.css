@@ -471,6 +471,15 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
   margin-top: .25rem;
 }
 
+.price-was {
+  margin-top: .7rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-decoration: line-through;
+}
+
 .price-includes {
   font-family: var(--font-head);
   font-size: .9rem;
@@ -484,7 +493,7 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
   font-size: 3rem;
   font-weight: 800;
   color: var(--green-800);
-  margin-block: .8rem 1rem;
+  margin-block: .15rem 1rem;
 }
 .price sup { font-size: 1.4rem; top: -1.1em; }
 .price .cents {

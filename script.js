@@ -56,7 +56,7 @@ document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 // Booking form → emails you via Web3Forms (free)
 // 1) Go to https://web3forms.com → enter your email → copy Access Key
 // 2) Paste the key below between the quotes
-const WEB3FORMS_ACCESS_KEY = "PASTE_YOUR_ACCESS_KEY_HERE";
+const WEB3FORMS_ACCESS_KEY = "d80e1d01-fcbc-4279-8f65-ddb1c8e8df61";
 
 const bookForm = document.getElementById("bookForm");
 const formSuccess = document.getElementById("formSuccess");
