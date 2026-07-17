@@ -28,22 +28,12 @@ Then visit http://localhost:8000
 - Pricing plans are in the `#pricing` section of `index.html`.
 - Colors are defined as CSS variables at the top of `styles.css`.
 
-## Book Now → text message (Twilio)
+## Book Now → email (Web3Forms, free)
 
-The booking form posts to `/api/book`, which texts your phone via Twilio.
+1. Go to [web3forms.com](https://web3forms.com)
+2. Enter the email where you want bookings (free Gmail is fine)
+3. Copy your **Access Key**
+4. Paste it in `script.js` where it says `PASTE_YOUR_ACCESS_KEY_HERE`
+5. Commit/push (or redeploy on Vercel)
 
-1. Create a free/trial account at [twilio.com](https://www.twilio.com)
-2. Get a Twilio phone number
-3. In Vercel → your project → **Settings → Environment Variables**, add:
-
-| Name | Value |
-|------|--------|
-| `TWILIO_ACCOUNT_SID` | from Twilio console |
-| `TWILIO_AUTH_TOKEN` | from Twilio console |
-| `TWILIO_FROM_NUMBER` | your Twilio number, like `+15551234567` |
-| `BOOKING_NOTIFY_TO` | `+14697421073` |
-
-4. Redeploy the project (Deployments → Redeploy)
-5. On Twilio trial, verify your personal phone number so it can receive texts
-
-Until those are set, Book Now will ask the customer to call instead.
+When someone hits Book Now, that email gets the name, phone, address, and plan.

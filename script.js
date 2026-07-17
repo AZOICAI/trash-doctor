@@ -53,7 +53,11 @@ const observer = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 
-// Booking form → texts your phone via /api/book (Twilio on Vercel)
+// Booking form → emails you via Web3Forms (free)
+// 1) Go to https://web3forms.com → enter your email → copy Access Key
+// 2) Paste the key below between the quotes
+const WEB3FORMS_ACCESS_KEY = "PASTE_YOUR_ACCESS_KEY_HERE";
+
 const bookForm = document.getElementById("bookForm");
 const formSuccess = document.getElementById("formSuccess");
 const submitBtn = bookForm.querySelector('button[type="submit"]');
@@ -61,28 +65,50 @@ const submitBtn = bookForm.querySelector('button[type="submit"]');
 bookForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  if (
+    !WEB3FORMS_ACCESS_KEY ||
+    WEB3FORMS_ACCESS_KEY === "PASTE_YOUR_ACCESS_KEY_HERE"
+  ) {
+    formSuccess.textContent =
+      "Booking is almost ready — please call or text (469) 742-1073 for now.";
+    formSuccess.classList.add("form-error");
+    formSuccess.hidden = false;
+    return;
+  }
+
   formSuccess.hidden = true;
   formSuccess.classList.remove("form-error");
   submitBtn.disabled = true;
   const originalLabel = submitBtn.innerHTML;
   submitBtn.textContent = "Sending…";
 
-  const data = Object.fromEntries(new FormData(bookForm).entries());
+  const formData = Object.fromEntries(new FormData(bookForm).entries());
 
   try {
-    const res = await fetch("/api/book", {
+    const res = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `New Trash Doctor booking — ${formData.plan}`,
+        from_name: "Trash Doctor Website",
+        name: formData.name,
+        phone: formData.phone,
+        address: formData.address,
+        plan: formData.plan,
+      }),
     });
     const result = await res.json().catch(() => ({}));
 
-    if (!res.ok) {
-      throw new Error(result.error || "Could not send booking.");
+    if (!res.ok || result.success === false) {
+      throw new Error(result.message || "Could not send booking.");
     }
 
     formSuccess.textContent =
-      "Thanks! We got your request and will text you shortly to confirm.";
+      "Thanks! We got your request and will call or text you shortly to confirm.";
     formSuccess.hidden = false;
     bookForm.reset();
   } catch (err) {
