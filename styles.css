@@ -709,6 +709,34 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
   font-size: .85rem;
   opacity: .8;
 }
+
+.pay-methods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-size: .78rem;
+  opacity: .85;
+}
+
+.pay-pill {
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 999px;
+  padding: .2rem .55rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+.pay-next {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+  width: 100%;
+  margin-top: .25rem;
+}
 .book-form input,
 .book-form select {
   width: 100%;

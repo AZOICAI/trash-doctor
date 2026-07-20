@@ -292,6 +292,10 @@
           <summary>How does the money-back guarantee work?</summary>
           <p>If you're not satisfied after a cleaning, contact us within 48 hours at (469) 742-1073. We'll try a re-clean first when that makes sense. If we still can't make it right, we may refund that service visit. Full details are in our <a href="terms.html">Terms of Service</a>.</p>
         </details>
+        <details class="faq-item">
+          <summary>How do I pay?</summary>
+          <p>After you submit your booking, you’ll go to our secure Stripe checkout to pay by card (Visa, Mastercard, Amex, Discover) or Apple Pay / Google Pay where available. Plan prices cover 2 bins; if you need more, we’ll confirm the small extra-bin fee before or after checkout.</p>
+        </details>
       </div>
     </section>
 
@@ -300,7 +304,7 @@
       <div class="cta-bg" aria-hidden="true"></div>
       <div class="container cta-inner">
         <h2>Ready for Fresh, Clean Bins?</h2>
-        <p>Book online in under 60 seconds.</p>
+        <p>Book online in under 60 seconds. Pay securely by card.</p>
 
         <form class="book-form" id="bookForm">
           <div class="form-row">
@@ -309,11 +313,11 @@
           </div>
           <div class="form-row">
             <input type="text" name="address" placeholder="Street address" required />
-            <select name="plan" required>
+            <select name="plan" id="planSelect" required>
               <option value="" disabled selected>Choose a plan</option>
-              <option>Monthly Checkup — $29.99/mo (includes 2 bins)</option>
-              <option>Quarterly Booster — $39.99/clean (includes 2 bins)</option>
-              <option>First Aid (One-Time Deep Clean) — $89.95 (includes 2 bins)</option>
+              <option value="monthly">Monthly Checkup — $29.99/mo (includes 2 bins)</option>
+              <option value="quarterly">Quarterly Booster — $39.99/clean (includes 2 bins)</option>
+              <option value="firstaid">First Aid (One-Time Deep Clean) — $89.95 (includes 2 bins)</option>
             </select>
           </div>
           <div class="form-row form-row-single">
@@ -328,13 +332,26 @@
               <option value="7+">7+ bins (we'll confirm price)</option>
             </select>
           </div>
-          <p class="form-hint">Plans include 2 bins. Extra bins are only $5 each.</p>
+          <p class="form-hint">Plans include 2 bins. Extra bins are only $5 each (collected when we confirm if over 2).</p>
           <label class="form-consent">
             <input type="checkbox" name="consent" required />
             <span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>, and I consent to being contacted by call or text at the number I provide about my booking. Msg &amp; data rates may apply.</span>
           </label>
-          <button type="submit" class="btn btn-primary btn-lg">Book Now <span aria-hidden="true">→</span></button>
-          <p class="form-success" id="formSuccess" hidden>Thanks! We got your request and will call or text you shortly to confirm.</p>
+          <button type="submit" class="btn btn-primary btn-lg">Book &amp; Pay <span aria-hidden="true">→</span></button>
+          <p class="pay-methods" aria-label="Accepted payment methods">
+            <span>Secure checkout</span>
+            <span class="pay-pill">Visa</span>
+            <span class="pay-pill">Mastercard</span>
+            <span class="pay-pill">Amex</span>
+            <span class="pay-pill">Discover</span>
+            <span class="pay-pill">Apple Pay</span>
+            <span class="pay-pill">Google Pay</span>
+          </p>
+          <p class="form-success" id="formSuccess" hidden></p>
+          <div class="pay-next" id="payNext" hidden>
+            <a class="btn btn-light btn-lg" id="payLink" href="#" rel="noopener">Continue to Secure Payment <span aria-hidden="true">→</span></a>
+            <p class="form-hint">You’ll finish payment on Stripe’s secure page. Extra bins over 2 are confirmed by text if needed.</p>
+          </div>
         </form>
         <p class="service-area-line">Proudly serving North Dallas suburbs: Plano, Frisco, McKinney, Allen, and surrounding areas.</p>
       </div>

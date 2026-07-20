@@ -28,12 +28,21 @@ Then visit http://localhost:8000
 - Pricing plans are in the `#pricing` section of `index.html`.
 - Colors are defined as CSS variables at the top of `styles.css`.
 
-## Book Now → email (Web3Forms, free)
+## Book Now → email (Web3Forms) + pay (Stripe)
 
+**Email alerts**
 1. Go to [web3forms.com](https://web3forms.com)
-2. Enter the email where you want bookings (free Gmail is fine)
-3. Copy your **Access Key**
-4. Paste it in `script.js` where it says `PASTE_YOUR_ACCESS_KEY_HERE`
-5. Commit/push (or redeploy on Vercel)
+2. Enter the email where you want bookings
+3. Put the Access Key in `script.js` (`WEB3FORMS_ACCESS_KEY`)
 
-When someone hits Book Now, that email gets the name, phone, address, and plan.
+**Card payments (Stripe Payment Links)**
+1. Create a free account at [stripe.com](https://stripe.com)
+2. Finish business verification when Stripe asks
+3. Dashboard → **Payment Links** → create one product/link for each plan:
+   - Monthly Checkup — $29.99
+   - Quarterly Booster — $39.99
+   - First Aid — $89.95
+4. Paste each `https://buy.stripe.com/...` URL into `STRIPE_PAYMENT_LINKS` in `script.js`
+5. Push/redeploy
+
+Until Stripe links are pasted, the form still emails you and tells the customer you’ll text a payment link.
