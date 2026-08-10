@@ -107,12 +107,12 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
 
 .brand-logo {
   width: auto;
-  height: 58px;
+  height: 72px;
   display: block;
 }
 
 .brand-light .brand-logo {
-  height: 54px;
+  height: 68px;
 }
 
 .main-nav {
@@ -227,14 +227,14 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
   background: var(--white);
   border: 3px solid var(--white);
   border-radius: 50%;
-  width: 140px; height: 140px;
+  width: 150px; height: 150px;
   display: grid;
   place-items: center;
   box-shadow: 0 8px 24px rgba(0,0,0,.25);
-  padding: .85rem;
+  padding: .7rem;
 }
 .hero-badge img {
-  width: 88%;
+  width: 92%;
   height: auto;
   object-fit: contain;
 }
@@ -778,7 +778,7 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
 }
 
 .brand-light .brand-logo {
-  height: 54px;
+  height: 68px;
 }
 
 .footer-brand p {
