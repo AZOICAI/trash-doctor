@@ -56,12 +56,11 @@ document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 // Booking form → emails you via Web3Forms, then Stripe Payment Link
 const WEB3FORMS_ACCESS_KEY = "d80e1d01-fcbc-4279-8f65-ddb1c8e8df61";
 
-// Create these in Stripe Dashboard → Payment Links, then paste the buy.stripe.com URLs:
-// https://dashboard.stripe.com/payment-links
+// Live Stripe Payment Links (Trash Doctor account)
 const STRIPE_PAYMENT_LINKS = {
-  monthly: "", // Monthly Checkup $29.99
-  quarterly: "", // Quarterly Booster $39.99
-  firstaid: "", // First Aid $89.95
+  monthly: "https://buy.stripe.com/5kQbJ1d8LfNe2Ap1s4f3a01", // Monthly Checkup $29.99/mo
+  quarterly: "https://buy.stripe.com/9B6dR96Kn1Wo2Ap1s4f3a02", // Quarterly Booster $39.99
+  firstaid: "https://book.stripe.com/5kQ7sLgkXbwYgrffiUf3a00", // First Aid $89.95
 };
 
 const PLAN_LABELS = {

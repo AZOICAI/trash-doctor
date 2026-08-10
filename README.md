@@ -36,13 +36,11 @@ Then visit http://localhost:8000
 3. Put the Access Key in `script.js` (`WEB3FORMS_ACCESS_KEY`)
 
 **Card payments (Stripe Payment Links)**
-1. Create a free account at [stripe.com](https://stripe.com)
-2. Finish business verification when Stripe asks
-3. Dashboard → **Payment Links** → create one product/link for each plan:
-   - Monthly Checkup — $29.99
-   - Quarterly Booster — $39.99
-   - First Aid — $89.95
-4. Paste each `https://buy.stripe.com/...` URL into `STRIPE_PAYMENT_LINKS` in `script.js`
-5. Push/redeploy
 
-Until Stripe links are pasted, the form still emails you and tells the customer you’ll text a payment link.
+Live Payment Links are already wired in `script.js` for:
+- Monthly Checkup — $29.99/mo
+- Quarterly Booster — $39.99 every 3 months
+- First Aid — $89.95 one-time
+
+After booking, customers are sent to Stripe Checkout to enter card details. Manage links in the [Stripe Dashboard](https://dashboard.stripe.com/payment-links).
+
