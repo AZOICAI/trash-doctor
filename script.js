@@ -56,11 +56,30 @@ document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 // Booking form → emails you via Web3Forms, then Stripe Payment Link
 const WEB3FORMS_ACCESS_KEY = "d80e1d01-fcbc-4279-8f65-ddb1c8e8df61";
 
-// Live Stripe Payment Links (Trash Doctor account)
+// Live Stripe Payment Links keyed by plan + extra bins beyond the 2 included
+// Extra Bin product: $5 one-time (First Aid) / $5/mo (Monthly) / $5 every 3 mo (Quarterly)
 const STRIPE_PAYMENT_LINKS = {
-  monthly: "https://buy.stripe.com/5kQbJ1d8LfNe2Ap1s4f3a01", // Monthly Checkup $29.99/mo
-  quarterly: "https://buy.stripe.com/9B6dR96Kn1Wo2Ap1s4f3a02", // Quarterly Booster $39.99
-  firstaid: "https://book.stripe.com/5kQ7sLgkXbwYgrffiUf3a00", // First Aid $89.95
+  firstaid: {
+    0: "https://book.stripe.com/5kQfZhb0DdF6df3daMf3a03", // $89.95
+    1: "https://book.stripe.com/5kQeVd4CffNecaZ2w8f3a04", // +$5
+    2: "https://book.stripe.com/8x26oH5Gj1Wo6QFb2Ef3a05", // +$10
+    3: "https://book.stripe.com/5kQfZhc4H30s5MB1s4f3a06", // +$15
+    4: "https://book.stripe.com/00waEX0lZ9oQej75Ikf3a07", // +$20
+  },
+  monthly: {
+    0: "https://buy.stripe.com/eVqfZh8Sv7gIb6V7Qsf3a08", // $29.99/mo
+    1: "https://buy.stripe.com/5kQ14nfgTfNe6QF0o0f3a09", // +$5/mo
+    2: "https://buy.stripe.com/14A9AT1q39oQb6V5Ikf3a0a", // +$10/mo
+    3: "https://buy.stripe.com/7sY5kDecP9oQ1wleeQf3a0b", // +$15/mo
+    4: "https://buy.stripe.com/3cI28rfgT30s3EtfiUf3a0c", // +$20/mo
+  },
+  quarterly: {
+    0: "https://buy.stripe.com/8x23cvc4HasUej7c6If3a0d", // $39.99/qtr
+    1: "https://buy.stripe.com/eVqfZh2u7dF67UJfiUf3a0e", // +$5/qtr
+    2: "https://buy.stripe.com/cNiaEX5Gj7gI4Ix4Egf3a0f", // +$10/qtr
+    3: "https://buy.stripe.com/9B6dR94CfeJa0shdaMf3a0g", // +$15/qtr
+    4: "https://buy.stripe.com/3cI4gz1q3eJaej7daMf3a0h", // +$20/qtr
+  },
 };
 
 const PLAN_LABELS = {
@@ -68,6 +87,21 @@ const PLAN_LABELS = {
   quarterly: "Quarterly Booster — $39.99/clean",
   firstaid: "First Aid (One-Time Deep Clean) — $89.95",
 };
+
+function extraBinsFromSelection(binsValue) {
+  // Plans include 2 bins; extras are $5 each. "7+" caps online checkout at 4 extras.
+  if (binsValue === "7+") return 4;
+  const n = parseInt(binsValue, 10);
+  if (!Number.isFinite(n) || n <= 2) return 0;
+  return Math.min(4, n - 2);
+}
+
+function checkoutUrlFor(planKey, binsValue) {
+  const byExtras = STRIPE_PAYMENT_LINKS[planKey];
+  if (!byExtras) return "";
+  const extras = extraBinsFromSelection(binsValue);
+  return byExtras[extras] || byExtras[0] || "";
+}
 
 const bookForm = document.getElementById("bookForm");
 const formSuccess = document.getElementById("formSuccess");
@@ -100,7 +134,12 @@ bookForm.addEventListener("submit", async (e) => {
   const formData = Object.fromEntries(new FormData(bookForm).entries());
   const planKey = formData.plan;
   const planLabel = PLAN_LABELS[planKey] || planKey;
-  const checkoutUrl = STRIPE_PAYMENT_LINKS[planKey] || "";
+  const extras = extraBinsFromSelection(formData.bins);
+  const checkoutUrl = checkoutUrlFor(planKey, formData.bins);
+  const extrasNote =
+    extras > 0
+      ? `${extras} extra bin(s) at $5 each included in Stripe total`
+      : "No extra bins";
 
   try {
     const res = await fetch("https://api.web3forms.com/submit", {
@@ -118,9 +157,10 @@ bookForm.addEventListener("submit", async (e) => {
         address: formData.address,
         plan: planLabel,
         bins: formData.bins,
+        extra_bins: extrasNote,
         payment:
           checkoutUrl
-            ? "Customer directed to Stripe checkout"
+            ? "Customer directed to Stripe checkout (plan + extras)"
             : "Stripe link not configured — collect payment manually",
         consent: formData.consent
           ? "Agreed to Terms, Privacy Policy, and call/text contact"
@@ -137,11 +177,12 @@ bookForm.addEventListener("submit", async (e) => {
 
     if (checkoutUrl) {
       formSuccess.textContent =
-        "Request received! Continue to secure Stripe checkout to pay.";
+        extras > 0
+          ? `Request received! Checkout includes your plan plus ${extras} extra bin(s) ($5 each).`
+          : "Request received! Continue to secure Stripe checkout to pay.";
       formSuccess.hidden = false;
       payLink.href = checkoutUrl;
       payNext.hidden = false;
-      // Send them to Stripe after a short beat so they see the confirmation
       window.setTimeout(() => {
         window.location.href = checkoutUrl;
       }, 1200);
