@@ -216,10 +216,10 @@
             <div class="price"><sup>$</sup>29<span class="cents">.99</span><span class="per">/mo</span></div>
             <p class="price-includes">Includes 2 Bins!</p>
             <ul>
-              <li>Every month</li>
+              <li>First cleaning: $89.95</li>
+              <li>Then normal monthly billing</li>
               <li>Deep clean &amp; sanitize</li>
               <li>Odor removal</li>
-              <li>Priority scheduling</li>
             </ul>
             <a href="#book" class="btn btn-primary">Book Now</a>
           </article>
@@ -231,13 +231,16 @@
             <div class="price"><sup>$</sup>39<span class="cents">.99</span><span class="per">/clean</span></div>
             <p class="price-includes">Includes 2 Bins!</p>
             <ul>
-              <li>Every 3 months</li>
+              <li>First cleaning: $89.95</li>
+              <li>Then normal quarterly billing</li>
               <li>Deep clean &amp; sanitize</li>
               <li>Odor removal</li>
-              <li>Reminders before each visit</li>
             </ul>
             <a href="#book" class="btn btn-outline">Book Now</a>
           </article>
+        </div>
+        <div class="coupon-banner" role="note">
+          <strong>Coupon code:</strong> <span class="coupon-code">UFVHAYNL</span> — $15 off your first cleaning with a monthly subscription.
         </div>
         <p class="price-note">Need more? Add extra bins to any plan for only $5 each.</p>
       </div>
@@ -287,7 +290,7 @@
         </details>
         <details class="faq-item">
           <summary>How do I pay?</summary>
-          <p>After you submit your booking, you’ll go to our secure Stripe checkout to pay by card (Visa, Mastercard, Amex, Discover) or Apple Pay / Google Pay where available. Plan prices cover 2 bins; if you need more, we’ll confirm the small extra-bin fee before or after checkout.</p>
+          <p>After you submit your booking, you’ll go to our secure Stripe checkout. The first cleaning is $89.95. After that, billing continues at the normal monthly or quarterly rate. Extra bins over 2 are $5 each — add Extra Bin on the Stripe page and set the quantity.</p>
         </details>
       </div>
     </section>
@@ -308,8 +311,8 @@
             <input type="text" name="address" placeholder="Street address" required />
             <select name="plan" id="planSelect" required>
               <option value="" disabled selected>Choose a plan</option>
-              <option value="monthly">Monthly Checkup — $29.99/mo (includes 2 bins)</option>
-              <option value="quarterly">Quarterly Booster — $39.99/clean (includes 2 bins)</option>
+              <option value="monthly">Monthly Checkup — $89.95 first clean, then $29.99/mo after 30 days (2 bins)</option>
+              <option value="quarterly">Quarterly Booster — $89.95 first clean, then $39.99/qtr after 90 days (2 bins)</option>
               <option value="firstaid">First Aid (One-Time Deep Clean) — $89.95 (includes 2 bins)</option>
             </select>
           </div>
@@ -325,7 +328,7 @@
               <option value="7+">7+ bins (+$20 online; we’ll confirm any more)</option>
             </select>
           </div>
-          <p class="form-hint">Plans include 2 bins. Extra bins are $5 each and added automatically at Stripe checkout.</p>
+          <p class="form-hint">Plans include 2 bins. Extra bins are $5 each — add them on the Stripe page and set the quantity. The first cleaning is $89.95, then billing continues at the normal monthly or quarterly rate.</p>
           <label class="form-consent">
             <input type="checkbox" name="consent" required />
             <span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a> and <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>, and I consent to being contacted by call or text at the number I provide about my booking. Msg &amp; data rates may apply.</span>
@@ -343,7 +346,7 @@
           <p class="form-success" id="formSuccess" hidden></p>
           <div class="pay-next" id="payNext" hidden>
             <a class="btn btn-light btn-lg" id="payLink" href="#" rel="noopener">Continue to Secure Payment <span aria-hidden="true">→</span></a>
-            <p class="form-hint">You’ll finish payment on Stripe’s secure page. Extra bins over 2 are included in the total at $5 each.</p>
+            <p class="form-hint">You’ll finish payment on Stripe’s secure page. If you have more than 2 bins, add Extra Bin there and set the quantity ($5 each).</p>
           </div>
         </form>
         <p class="service-area-line">Proudly serving North Dallas suburbs: Plano, Frisco, McKinney, Allen, and surrounding areas.</p>

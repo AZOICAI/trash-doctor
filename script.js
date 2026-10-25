@@ -56,35 +56,17 @@ document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
 // Booking form → emails you via Web3Forms, then Stripe Payment Link
 const WEB3FORMS_ACCESS_KEY = "d80e1d01-fcbc-4279-8f65-ddb1c8e8df61";
 
-// Live Stripe Payment Links keyed by plan + extra bins beyond the 2 included
-// Extra Bin product: $5 one-time (First Aid) / $5/mo (Monthly) / $5 every 3 mo (Quarterly)
+// One live Payment Link per plan. Extra bins are optional add-ons on Stripe checkout
+// (adjustable quantity, up to 4 extra bins / $5 each).
 const STRIPE_PAYMENT_LINKS = {
-  firstaid: {
-    0: "https://book.stripe.com/5kQfZhb0DdF6df3daMf3a03", // $89.95
-    1: "https://book.stripe.com/5kQeVd4CffNecaZ2w8f3a04", // +$5
-    2: "https://book.stripe.com/8x26oH5Gj1Wo6QFb2Ef3a05", // +$10
-    3: "https://book.stripe.com/5kQfZhc4H30s5MB1s4f3a06", // +$15
-    4: "https://book.stripe.com/00waEX0lZ9oQej75Ikf3a07", // +$20
-  },
-  monthly: {
-    0: "https://buy.stripe.com/eVqfZh8Sv7gIb6V7Qsf3a08", // $29.99/mo
-    1: "https://buy.stripe.com/5kQ14nfgTfNe6QF0o0f3a09", // +$5/mo
-    2: "https://buy.stripe.com/14A9AT1q39oQb6V5Ikf3a0a", // +$10/mo
-    3: "https://buy.stripe.com/7sY5kDecP9oQ1wleeQf3a0b", // +$15/mo
-    4: "https://buy.stripe.com/3cI28rfgT30s3EtfiUf3a0c", // +$20/mo
-  },
-  quarterly: {
-    0: "https://buy.stripe.com/8x23cvc4HasUej7c6If3a0d", // $39.99/qtr
-    1: "https://buy.stripe.com/eVqfZh2u7dF67UJfiUf3a0e", // +$5/qtr
-    2: "https://buy.stripe.com/cNiaEX5Gj7gI4Ix4Egf3a0f", // +$10/qtr
-    3: "https://buy.stripe.com/9B6dR94CfeJa0shdaMf3a0g", // +$15/qtr
-    4: "https://buy.stripe.com/3cI4gz1q3eJaej7daMf3a0h", // +$20/qtr
-  },
+  firstaid: "https://book.stripe.com/5kQfZhb0DdF6df3daMf3a03",
+  monthly: "https://buy.stripe.com/28EeVd1q3asU3EteeQf3a0l", // First cleaning paid now + monthly recurring billing after the first visit
+  quarterly: "https://buy.stripe.com/fZucN5d8L6cE2Ap4Egf3a0m", // First cleaning paid now + quarterly recurring billing after the first visit
 };
 
 const PLAN_LABELS = {
-  monthly: "Monthly Checkup — $29.99/mo",
-  quarterly: "Quarterly Booster — $39.99/clean",
+  monthly: "Monthly Checkup — first cleaning $89.95, then normal monthly billing",
+  quarterly: "Quarterly Booster — first cleaning $89.95, then normal quarterly billing",
   firstaid: "First Aid (One-Time Deep Clean) — $89.95",
 };
 
@@ -96,11 +78,8 @@ function extraBinsFromSelection(binsValue) {
   return Math.min(4, n - 2);
 }
 
-function checkoutUrlFor(planKey, binsValue) {
-  const byExtras = STRIPE_PAYMENT_LINKS[planKey];
-  if (!byExtras) return "";
-  const extras = extraBinsFromSelection(binsValue);
-  return byExtras[extras] || byExtras[0] || "";
+function checkoutUrlFor(planKey) {
+  return STRIPE_PAYMENT_LINKS[planKey] || "";
 }
 
 const bookForm = document.getElementById("bookForm");
@@ -135,11 +114,11 @@ bookForm.addEventListener("submit", async (e) => {
   const planKey = formData.plan;
   const planLabel = PLAN_LABELS[planKey] || planKey;
   const extras = extraBinsFromSelection(formData.bins);
-  const checkoutUrl = checkoutUrlFor(planKey, formData.bins);
+  const checkoutUrl = checkoutUrlFor(planKey);
   const extrasNote =
     extras > 0
-      ? `${extras} extra bin(s) at $5 each included in Stripe total`
-      : "No extra bins";
+      ? `${extras} extra bin(s) — customer can add Extra Bin on Stripe checkout ($5 each, qty adjustable)`
+      : "No extra bins (2 included)";
 
   try {
     const res = await fetch("https://api.web3forms.com/submit", {
@@ -178,7 +157,7 @@ bookForm.addEventListener("submit", async (e) => {
     if (checkoutUrl) {
       formSuccess.textContent =
         extras > 0
-          ? `Request received! Checkout includes your plan plus ${extras} extra bin(s) ($5 each).`
+          ? `Request received! On the next page, add Extra Bin and set the quantity to ${extras} ($5 each).`
           : "Request received! Continue to secure Stripe checkout to pay.";
       formSuccess.hidden = false;
       payLink.href = checkoutUrl;

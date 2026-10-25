@@ -528,6 +528,29 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.15; }
   margin-top: 1.6rem;
 }
 
+.coupon-banner {
+  margin: 1.4rem auto 0;
+  max-width: 760px;
+  text-align: center;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--green-accent);
+  border-radius: 12px;
+  padding: .9rem 1.1rem;
+  color: var(--ink);
+  font-size: .92rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,.03);
+}
+
+.coupon-code {
+  display: inline-block;
+  font-family: var(--font-head);
+  font-weight: 800;
+  letter-spacing: .08em;
+  color: var(--green-800);
+  text-transform: uppercase;
+}
+
 /* ============ Guarantee / Grand Opening ============ */
 .guarantee {
   background: linear-gradient(180deg, #f6faf6 0%, var(--white) 100%);
